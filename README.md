@@ -38,7 +38,7 @@ const bkashConfig = {
  }
 ```
 
-## Tokenized Without Agreement or Checkout URL
+## Without Agreement
 
 bkashDynamicPaymentGateway.js
 
@@ -187,9 +187,9 @@ amount: 10
 const result =  await refundTransaction(bkashConfig, refundDetails)
 ```
 
-## Tokenized With Agreement
+## With Agreement
 
-const { createAgreement, executeAgreement, cancelAgreement, createPaymentWithAgreement, executePayment, queryPayment, searchTransaction, refundTransaction } = require('bkash-payment')
+const { createAgreement, executeAgreement, cancelAgreement, createPaymentWithAgreement, executePayment, queryPayment, searchTransaction, refundTransaction } = require('bkash-dynamic-payment')
 
 # Create Agreement
 
