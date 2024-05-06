@@ -1,17 +1,22 @@
-const fetch = require("node-fetch")
-const authHeaders = require("./AuthHeaders")
+const axios = require("axios");
+const authHeaders = require("./AuthHeaders");
 
 const queryPayment = async (bkashConfig, paymentId) => {
-  const queryResponse = await fetch(bkashConfig?.base_url + "/query/payment", {
-    method: "POST",
-    headers: await authHeaders(bkashConfig),
-    body: JSON.stringify({
-      paymentId,
-    }),
-  })
-  
-  const queryResult = await queryResponse.json()
-  return queryResult
-}
+  try {
+    const response = await axios.post(
+      `${bkashConfig?.base_url}/query/payment`,
+      {
+        paymentId,
+      },
+      {
+        headers: await authHeaders(bkashConfig),
+      }
+    );
 
-module.exports = queryPayment
+    return response.data;
+  } catch (e) {
+    return e;
+  }
+};
+
+module.exports = queryPayment;

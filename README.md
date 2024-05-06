@@ -1,6 +1,6 @@
 ## bKash Dynamic Charge Payment
 
-A Library to integrate bKash Dynamic Charge Payment on your backend application.
+Library to integrate bKash Dynamic Charge Payment on your backend application.
 
 # NPM Install
 

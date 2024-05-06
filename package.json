@@ -1,16 +1,24 @@
 {
   "name": "bkash-dynamic-payment",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Node.js application for integrating bKash dynamic charge payment.",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js"
   },
-  "keywords": ["bKash", "Bkash", "bkash-payment", "dynamic charge payment for bkash", "bkash-dynamic-payment", "bkash", "dynamic"],
+  "keywords": [
+    "bKash",
+    "Bkash",
+    "bkash-payment",
+    "dynamic charge payment for bkash",
+    "bkash-dynamic-payment",
+    "bkash",
+    "dynamic"
+  ],
   "author": "srtipu5",
   "license": "ISC",
   "dependencies": {
-    "node-fetch": "^2.6.1",
+    "axios": "^1.6.8",
     "uuid": "^9.0.0"
   }
 }

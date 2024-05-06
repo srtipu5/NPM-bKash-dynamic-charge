@@ -1,21 +1,26 @@
-const fetch = require("node-fetch")
-const authHeaders = require("./AuthHeaders")
+const axios = require("axios");
+const authHeaders = require("./AuthHeaders");
 
 const refundTransaction = async (bkashConfig, refundDetails) => {
-  const refundResponse = await fetch(bkashConfig?.base_url + "/payment/refund'", {
-    method: "POST",
-    headers: await authHeaders(bkashConfig),
-    body: JSON.stringify({
-      paymentId: refundDetails?.paymentId,
-      trxID: refundDetails?.trxId,
-      amount: refundDetails?.amount,
-      sku : refundDetails?.sku || 'sku',
-      reason: refundDetails?.reason || 'reason'
-    }),
-  })
-  
-  const refundResult = await refundResponse.json()
-  return refundResult
-}
+  try {
+    const response = await axios.post(
+      `${bkashConfig?.base_url}/payment/refund`,
+      {
+        paymentId: refundDetails?.paymentId,
+        trxID: refundDetails?.trxId,
+        amount: refundDetails?.amount,
+        sku: refundDetails?.sku || "sku",
+        reason: refundDetails?.reason || "reason",
+      },
+      {
+        headers: await authHeaders(bkashConfig),
+      }
+    );
 
-module.exports = refundTransaction
+    return response.data;
+  } catch (e) {
+    return e;
+  }
+};
+
+module.exports = refundTransaction;

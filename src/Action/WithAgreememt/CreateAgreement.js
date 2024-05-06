@@ -1,32 +1,33 @@
-const fetch = require("node-fetch")
-const authHeaders = require("../AuthHeaders")
+const axios = require("axios");
+const authHeaders = require("../AuthHeaders");
 
 const createAgreement = async (bkashConfig, paymentDetails) => {
   try {
-    const { callbackURL } = paymentDetails
-  
-    if(!callbackURL){
+    const { callbackURL } = paymentDetails;
+
+    if (!callbackURL) {
       return {
-        statusCode : 2065,
-        statusMessage : 'callbackURL required'
-      }
+        statusCode: 2065,
+        statusMessage: "callbackURL required",
+      };
     }
 
-    const createAgreementResopnse = await fetch(bkashConfig?.base_url + "/agreement/create", {
-      method: "POST",
-      headers: await authHeaders(bkashConfig),
-      body: JSON.stringify({
+    const response = await axios.post(
+      `${bkashConfig?.base_url}/agreement/create`,
+      {
         mode: "1000",
-        callbackURL: callbackURL,
-        payerReference: reference || "1"
-      }),
-    })
+        callbackURL,
+        payerReference: reference || "1",
+      },
+      {
+        headers: await authHeaders(bkashConfig),
+      }
+    );
 
-    const createAgreementResult = await createAgreementResopnse.json()
-    return createAgreementResult
+    return response.data;
   } catch (e) {
-    return e
+    return e;
   }
-}
+};
 
-module.exports = createAgreement
+module.exports = createAgreement;
